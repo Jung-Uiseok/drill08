@@ -26,15 +26,20 @@ open_canvas()
 
 def reset_world():
     global running
+    global grass
+
     running = True
+    grass = Grass()
 
 
 def update_world():
+    grass.update()
     pass
 
 
 def render_world():
     clear_canvas()
+    grass.draw()
     update_canvas()
 
 
