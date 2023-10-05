@@ -10,7 +10,7 @@ class Grass:
     def draw(self):  # self : 생성된 객체를 가리키는 더미 변수
         self.image.draw(400,30)
 
-    def update(self): pass
+    def update(self): pass  # 전체적인 통일성을 위해 만들어 줌
 
 
 class Boy:
@@ -43,26 +43,29 @@ open_canvas()
 def reset_world():
     global running
     global grass
-    global boy
     global team
+    global world
 
     running = True
+    world = []  # 현재 게임 월드에 있는 객체를 모두 담고 있는 리스트
+                # update_world 와 render_world 의 코드를 바꾸지 않아도 된다는 장점
+
     grass = Grass()
-    boy = Boy()
+    world.append(grass)
+
     team = [Boy() for i in range(10)]
+    world += team
 
 
 def update_world():
-    grass.update()
-    for boy in team:
-        boy.update()
+    for o in world:
+        o.update()
 
 
 def render_world():
     clear_canvas()
-    grass.draw()
-    for boy in team:
-        boy.draw()
+    for o in world:
+        o.draw()
     update_canvas()
 
 
